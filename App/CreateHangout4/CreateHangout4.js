@@ -6,8 +6,10 @@
 //  Copyright © 2018 [Company]. All rights reserved.
 //
 
-import { Image, View, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { Image, View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native"
 import React from "react"
+import {Calendar} from 'react-native-calendars';
+
 
 
 export default class CreateHangout4 extends React.Component {
@@ -23,7 +25,9 @@ export default class CreateHangout4 extends React.Component {
 	}
 
 	constructor(props) {
-		super(props)
+    super(props);
+    this.state = {};
+    this.onDayPress = this.onDayPress.bind(this);
 	}
 
 	componentDidMount() {
@@ -65,6 +69,12 @@ export default class CreateHangout4 extends React.Component {
 						flexDirection: "column",
 						justifyContent: "flex-end",
 					}}>
+					<Calendar
+						onDayPress={this.onDayPress}
+						style={styles.calendar}
+						hideExtraDays
+						markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}}}
+					/>
 					<TouchableOpacity
 						onPress={this.onNextButtonPressed}
 						style={styles.nextbuttonButton}>
@@ -73,6 +83,13 @@ export default class CreateHangout4 extends React.Component {
 					</TouchableOpacity>
 				</View>
 			</View>
+	}
+		onDayPress(day) {
+		this.setState({
+			selected: day.dateString
+		});
+		//Pop up clock
+		alert(day.dateString)
 	}
 }
 
