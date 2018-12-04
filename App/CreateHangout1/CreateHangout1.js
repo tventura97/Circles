@@ -24,16 +24,12 @@ export default class CreateHangout1 extends React.Component {
 
 	constructor(props) {
 		super(props)
+		this.state = { name: '' };
+
 	}
 
 	componentDidMount() {
 
-	}
-
-	onNextButtonPressed = () => {
-
-		const { navigate } = this.props.navigation
-		navigate("CreateHangout2")
 	}
 
 	render() {
@@ -55,9 +51,13 @@ export default class CreateHangout1 extends React.Component {
 						justifyContent: "center",
 					}}>
 					<TextInput
-						style={styles.rectangleTextInput}/>
+						style={styles.rectangleTextInput}
+						onChangeText={(name) => this.setState({name})}
+						value={this.state.name}/>
 					<TouchableOpacity
-						onPress={this.onNextButtonPressed}
+						onPress={() =>{
+							this.props.navigation.navigate("CreateHangout2", {name: this.state.name})
+						}}
 						style={styles.nextbuttonButton}>
 						<Text
 							style={styles.nextbuttonButtonText}>

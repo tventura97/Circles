@@ -37,12 +37,14 @@ export default class CreateHangout2 extends React.Component {
 
 	onForwardButtonPressed = () => {
 
-		const { navigate } = this.props.navigation
+		const { navigation } = this.props;
+		const name = navigation.getParam("name", "No Name")
+		this.props.navigation.navigate("CreateHangout3", {name: name})
 
-		navigate("CreateHangout3")
 	}
 
 	render() {
+
 
 		return <View
 				pointerEvents="box-none"

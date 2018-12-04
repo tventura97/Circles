@@ -24,7 +24,10 @@ export default class CreateHangout3 extends React.Component {
 
 	constructor(props) {
 		super(props);
-	 	this.state = {text: '', height: 0}
+	 	this.state = {
+			description: '',
+			text: '',
+			height: 0}
 	}
 
 	componentDidMount() {
@@ -34,13 +37,6 @@ export default class CreateHangout3 extends React.Component {
 	onBackButtonPressed = () => {
 
 		this.props.navigation.goBack()
-	}
-
-	onNextButtonPressed = () => {
-
-		const { navigate } = this.props.navigation
-
-		navigate("CreateHangout4")
 	}
 
 	render() {
@@ -64,18 +60,23 @@ export default class CreateHangout3 extends React.Component {
 				{...this.props}
 				multiline={true}
 				blurOnSubmit={true}
-     onSubmitEditing={()=>{Keyboard.dismiss()}}
-
-				onChangeText={(text) => {
-            this.setState({ text })
+     		onSubmitEditing={()=>{Keyboard.dismiss()}}
+				onChangeText={(description, text) => {
+            this.setState({ description, text })
         }}
+				value={this.state.description}
         onContentSizeChange={(event) => {
             this.setState({ height: event.nativeEvent.contentSize.height })
         }}
         style={[styles.rectangleTextInput, {height: Math.max(100, this.state.height)}]}
 />
 				<TouchableOpacity
-					onPress={this.onNextButtonPressed}
+					onPress={() =>{
+						const { navigation } = this.props;
+						const name = navigation.getParam("name", "No Name")
+						this.props.navigation.navigate("CreateHangout4", {name: name, description: this.state.description})
+
+					}}
 					style={styles.nextbuttonButton}>
 					<Text
 					style={styles.nextbuttonButtonText}>next</Text>

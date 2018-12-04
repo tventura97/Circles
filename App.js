@@ -17,6 +17,7 @@ import CreateHangout2 from "./App/CreateHangout2/CreateHangout2"
 const PushRouteOne = createStackNavigator({
 	CreateHangout1: {
 		screen: CreateHangout1,
+		name: ''
 	},
 	CreateHangout2: {
 		screen: CreateHangout2,
@@ -57,7 +58,6 @@ export default class App extends React.Component {
 	}
 
 	componentDidMount() {
-
 		this.initProjectFonts()
 	}
 
@@ -72,7 +72,7 @@ export default class App extends React.Component {
 			fontsReady: true,
 		})
 	}
-
+	
 	render() {
 
 		if (!this.state.fontsReady) { return (<Expo.AppLoading/>); }

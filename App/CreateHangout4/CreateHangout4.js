@@ -38,14 +38,11 @@ export default class CreateHangout4 extends React.Component {
 
 		this.props.navigation.goBack()
 	}
-	onNextButtonPressed = () => {
-
-		const { navigate } = this.props.navigation
-
-		navigate("CreateHangout5")
-	}
 
 	render() {
+		const { navigation } = this.props;
+		const name = navigation.getParam("name", "No Name")
+		const description = navigation.getParam("description", "No Description")
 
 		return <View
 				pointerEvents="box-none"
@@ -76,7 +73,9 @@ export default class CreateHangout4 extends React.Component {
 						markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}}}
 					/>
 					<TouchableOpacity
-						onPress={this.onNextButtonPressed}
+						onPress={() =>{
+							this.props.navigation.navigate("CreateHangout5", {name: name, description:description})
+						}}
 						style={styles.nextbuttonButton}>
 						<Text
 						style={styles.nextbuttonButtonText}>next</Text>

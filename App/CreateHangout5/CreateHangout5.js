@@ -42,6 +42,12 @@ export default class CreateHangout5 extends React.Component {
 
 	render() {
 
+		const { navigation } = this.props;
+		const name = navigation.getParam("name", "No Name")
+		const description = navigation.getParam("description", "No Description")
+
+		alert(description)
+
 		return <View
 				pointerEvents="box-none"
 				style={styles.createhangout5View}>
@@ -55,11 +61,18 @@ export default class CreateHangout5 extends React.Component {
 				<Image
 					source={require("./../../assets/images/logo-2.png")}
 					style={styles.logoImage}/>
-				<Text
-					style={styles.reviewYourHangoutText}>review your hangout agenda</Text>
+					<Text
+					style={styles.reviewYourHangoutText}>review your hangout agenda with your</Text>
+					<Text
+						style={styles.circleNameText}>best friends circle</Text>
+
 				<View
 					pointerEvents="box-none"
 					style={styles.agendaView}>
+					<Text
+						style={styles.nameText}>{name}</Text>
+					<Text
+						style={styles.descriptionText}>{description}</Text>
 					<View
 						pointerEvents="box-none"
 						style={styles.googleMapsInfoView}>
@@ -95,6 +108,39 @@ export default class CreateHangout5 extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	nameText:{
+		paddingTop:10,
+		color:"black",
+		fontFamily: "Nunito-Bold",
+		fontSize: 35,
+		fontStyle: "normal",
+		fontWeight: "bold",
+		textAlign: "center",
+		lineHeight: 0,
+		letterSpacing: 0,
+	},
+	circleNameText:{
+		paddingTop:10,
+		color:"black",
+		fontFamily: "Nunito-Bold",
+		fontSize: 25,
+		fontStyle: "normal",
+		fontWeight: "bold",
+		textAlign: "center",
+		lineHeight: 0,
+		letterSpacing: 0,
+	},
+	descriptionText:{
+		paddingTop:10,
+		color:"black",
+		fontFamily: "Nunito-Light",
+		fontSize: 20,
+		fontStyle: "normal",
+		fontWeight: "bold",
+		textAlign: "center",
+		lineHeight: 0,
+		letterSpacing: 0,
+	},
 	createhangout5View: {
 		backgroundColor: 'rgb(250, 250, 250)',
 		flex: 1,
