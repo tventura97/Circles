@@ -27,8 +27,18 @@ export default class CreateHangout4 extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {};
+		this.state.isDateTimePickerVisible= false,
     this.onDayPress = this.onDayPress.bind(this);
 	}
+
+	_showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+_hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+_handleDatePicked = (time) => {
+	console.log('A time has been picked: ', time);
+	this._hideDateTimePicker();
+};
 
 	componentDidMount() {
 
@@ -43,6 +53,7 @@ export default class CreateHangout4 extends React.Component {
 		const { navigation } = this.props;
 		const name = navigation.getParam("name", "No Name")
 		const description = navigation.getParam("description", "No Description")
+		const date = navigation.getParam("date", "No Date")
 
 		return <View
 				pointerEvents="box-none"
@@ -72,9 +83,17 @@ export default class CreateHangout4 extends React.Component {
 						hideExtraDays
 						markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}}}
 					/>
+					<View style={{ flex: 1 }}>
+					<DateTimePicker
+							isVisible={this.state.isDateTimePickerVisible}
+							onConfirm={this._handleDatePicked}
+							onCancel={this._hideDateTimePicker}
+							mode='time'
+						/>
+					</View>
 					<TouchableOpacity
 						onPress={() =>{
-							this.props.navigation.navigate("CreateHangout5", {name: name, description:description})
+							this.props.navigation.navigate("CreateHangout5", {name: name, description:description, date: date})
 						}}
 						style={styles.nextbuttonButton}>
 						<Text
@@ -88,7 +107,8 @@ export default class CreateHangout4 extends React.Component {
 			selected: day.dateString
 		});
 		//Pop up clock
-		alert(day.dateString)
+			date = day.dateString
+			this._showDateTimePicker
 	}
 }
 

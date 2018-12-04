@@ -45,8 +45,8 @@ export default class CreateHangout5 extends React.Component {
 		const { navigation } = this.props;
 		const name = navigation.getParam("name", "No Name")
 		const description = navigation.getParam("description", "No Description")
-
-		alert(description)
+		const date = navigation.getParam("date", "No Date")
+		alert("name: " + name + "description: " + description + "date" + date)
 
 		return <View
 				pointerEvents="box-none"
