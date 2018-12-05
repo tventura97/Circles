@@ -9,6 +9,7 @@
 import { Image, View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native"
 import React from "react"
 import {Calendar} from 'react-native-calendars';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 
 
@@ -36,7 +37,11 @@ export default class CreateHangout4 extends React.Component {
 _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
 _handleDatePicked = (time) => {
+
 	console.log('A time has been picked: ', time);
+	time = time.toString()
+	var _time = time.split('T')[1]
+	var __time = _time.slice(0,5)
 	this._hideDateTimePicker();
 };
 
@@ -54,7 +59,7 @@ _handleDatePicked = (time) => {
 		const name = navigation.getParam("name", "No Name")
 		const description = navigation.getParam("description", "No Description")
 		const date = navigation.getParam("date", "No Date")
-
+		const time = navigation.getParam("time", "No Time")
 		return <View
 				pointerEvents="box-none"
 				style={styles.createhangout4View}>
@@ -93,7 +98,7 @@ _handleDatePicked = (time) => {
 					</View>
 					<TouchableOpacity
 						onPress={() =>{
-							this.props.navigation.navigate("CreateHangout5", {name: name, description:description, date: date})
+							this.props.navigation.navigate("CreateHangout5", {name: name, description:description, date: date, time: time})
 						}}
 						style={styles.nextbuttonButton}>
 						<Text
@@ -104,12 +109,11 @@ _handleDatePicked = (time) => {
 	}
 		onDayPress(day) {
 		this.setState({
-			selected: day.dateString
+			selected: day.dateString,
+			date: day.dateString
 		});
 		//Pop up clock
-			date = day.dateString
-			this._showDateTimePicker
-	}
+			this.setState({ isDateTimePickerVisible: true })	}
 }
 
 const styles = StyleSheet.create({

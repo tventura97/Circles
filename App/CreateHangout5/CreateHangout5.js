@@ -46,7 +46,6 @@ export default class CreateHangout5 extends React.Component {
 		const name = navigation.getParam("name", "No Name")
 		const description = navigation.getParam("description", "No Description")
 		const date = navigation.getParam("date", "No Date")
-		alert("name: " + name + "description: " + description + "date" + date)
 
 		return <View
 				pointerEvents="box-none"
@@ -73,6 +72,8 @@ export default class CreateHangout5 extends React.Component {
 						style={styles.nameText}>{name}</Text>
 					<Text
 						style={styles.descriptionText}>{description}</Text>
+					<Text style={styles.date}>December 6, 2018</Text>
+					<Text style={styles.time}>1:00 PM</Text>
 					<View
 						pointerEvents="box-none"
 						style={styles.googleMapsInfoView}>
@@ -108,6 +109,28 @@ export default class CreateHangout5 extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	date:{
+		paddingTop:10,
+		color:"black",
+		fontFamily: "Nunito-Regular",
+		fontSize: 25,
+		fontStyle: "normal",
+		fontWeight: "bold",
+		textAlign: "center",
+		lineHeight: 0,
+		letterSpacing: 0,
+	},
+	time:{
+		paddingTop:10,
+		color:"black",
+		fontFamily: "Nunito-Light",
+		fontSize: 20,
+		fontStyle: "normal",
+		fontWeight: "bold",
+		textAlign: "center",
+		lineHeight: 0,
+		letterSpacing: 0,
+	},
 	nameText:{
 		paddingTop:10,
 		color:"black",
