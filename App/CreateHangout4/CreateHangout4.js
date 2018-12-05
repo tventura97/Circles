@@ -29,6 +29,7 @@ export default class CreateHangout4 extends React.Component {
     super(props);
     this.state = {};
 		this.state.isDateTimePickerVisible= false,
+		this.state.time = ''
     this.onDayPress = this.onDayPress.bind(this);
 	}
 
@@ -40,8 +41,13 @@ _handleDatePicked = (time) => {
 
 	console.log('A time has been picked: ', time);
 	time = time.toString()
-	var _time = time.split('T')[1]
-	var __time = _time.slice(0,5)
+	console.log(time)
+	var _time = time.split(' ')
+	console.log(_time)
+	var __time = _time[4]
+	this.setState({time: __time});
+	console.log(__time)
+	console.log(this.state.time)
 	this._hideDateTimePicker();
 };
 
@@ -98,7 +104,7 @@ _handleDatePicked = (time) => {
 					</View>
 					<TouchableOpacity
 						onPress={() =>{
-							this.props.navigation.navigate("CreateHangout5", {name: name, description:description, date: date, time: time})
+							this.props.navigation.navigate("CreateHangout5", {name: name, description:description, date: this.state.date, time: this.state.time})
 						}}
 						style={styles.nextbuttonButton}>
 						<Text
@@ -113,7 +119,11 @@ _handleDatePicked = (time) => {
 			date: day.dateString
 		});
 		//Pop up clock
-			this.setState({ isDateTimePickerVisible: true })	}
+			this.setState({ isDateTimePickerVisible: true });
+			console.log(this.state.time)
+			console.log(this.state.date)
+
+		}
 }
 
 const styles = StyleSheet.create({

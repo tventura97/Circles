@@ -40,13 +40,92 @@ export default class CreateHangout5 extends React.Component {
 
 	}
 
+
+	getTime = (time) => {
+		time = time.toString()
+		_time = time.split(':')
+		var day
+		var hour
+		var minute = _time[1]
+		if (Number(_time[0]) > 12)
+		{
+			day = 'PM'
+			hour = Number(_time[0]) - 12
+		}
+		else {
+			day = 'AM'
+			hour = Number(_time[0])
+		}
+
+		return hour + ':' + minute + ' ' + day
+
+
+	}
+
+	getDate = (date) => {
+		date = date.toString()
+		_date = date.split('-')
+		console.log(_date)
+		var day = _date[2]
+		var month
+		var year = _date[0]
+
+
+		switch(Number(_date[1]))
+		{
+				case 1:
+					month = 'January'
+					break;
+				case 2:
+					month = 'February'
+					break;
+				case 3:
+					month = 'March'
+					break;
+				case 4:
+					month = 'April'
+					break;
+				case 5:
+					month = 'May'
+					break;
+				case 6:
+					month = 'June'
+					break;
+				case 7:
+					month = 'July'
+					break;
+				case 8:
+					month = 'August'
+					break;
+				case 9:
+					month = 'September'
+					break;
+				case 10:
+					month = 'October'
+					break;
+				case 11:
+					month = 'November'
+					break;
+				case 12:
+					month = 'December'
+					break;
+
+		}
+
+		return month + ' ' + day + ', ' + year
+
+
+	}
+
 	render() {
 
 		const { navigation } = this.props;
 		const name = navigation.getParam("name", "No Name")
 		const description = navigation.getParam("description", "No Description")
 		const date = navigation.getParam("date", "No Date")
-
+		var __date = this.getDate(date)
+		const time = navigation.getParam("time", "No Time")
+		var __time = this.getTime(time)
 		return <View
 				pointerEvents="box-none"
 				style={styles.createhangout5View}>
@@ -72,8 +151,8 @@ export default class CreateHangout5 extends React.Component {
 						style={styles.nameText}>{name}</Text>
 					<Text
 						style={styles.descriptionText}>{description}</Text>
-					<Text style={styles.date}>December 6, 2018</Text>
-					<Text style={styles.time}>1:00 PM</Text>
+					<Text style={styles.date}>{__date}</Text>
+					<Text style={styles.time}>{__time}</Text>
 					<View
 						pointerEvents="box-none"
 						style={styles.googleMapsInfoView}>
